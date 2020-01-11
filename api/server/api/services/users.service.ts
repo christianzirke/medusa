@@ -2,8 +2,15 @@ import User from '../data/models/user';
 import bcrypt from 'bcrypt';
 
 export class ExamplesService {
-  all(): Promise<User[]> {
-    return User.findAll();
+  async all({ limit: queryLimit = 25, page = 1 }): Promise<User[]> {
+    const limit = queryLimit >> 0 || 25;
+    const offset = ((page >> 0 || 1) - 1) * limit;
+    const result = await User.findAndCountAll({
+      limit,
+      offset,
+    });
+    
+    return { page, limit, ...result };
   }
   
   byId(user_id: number): Promise<User> {

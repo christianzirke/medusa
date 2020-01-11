@@ -11,8 +11,10 @@ passport.use(new LocalStrategy(
   },
   async (email, password, done) => {
     const user = await User.scope("withPassword").findOne({ where: { email } });
+    
     if (user) {
       const match = await bcrypt.compare(password, user.password);
+      
       if (match) {
         const jsonUser = user.toJSON();
         delete jsonUser.password;

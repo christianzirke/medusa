@@ -9,7 +9,7 @@ export class Controller {
   }
   
   async getAll(request: Request, response: Response) {
-    const users = await usersService.all();
+    const users = await usersService.all(request.query);
     response.json(users);
   }
   

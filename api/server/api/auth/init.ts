@@ -13,5 +13,4 @@ passport.deserializeUser(function(id, cb) {
     
     return cb(null, false);
   });
-  
 });
