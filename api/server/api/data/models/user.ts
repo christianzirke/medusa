@@ -33,6 +33,14 @@ User.init({
   sequelize,
   tableName: 'users',
   paranoid: true,
+  defaultScope: {
+    attributes: { exclude: ['password'] },
+  },
+  scopes: {
+    withPassword: {
+      attributes: { exclude: [] },
+    },
+  },
 });
 
 User.sync();
