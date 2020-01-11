@@ -1,0 +1,4 @@
+.idea
+api/dist
+/api/node_modules/
+/api/dist/
