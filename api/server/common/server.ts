@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import passport from 'passport';
 import path from 'path';
 import http from 'http';
 import os from 'os';
@@ -20,14 +21,18 @@ export default class ExpressServer {
     app.set('appPath', `${root}client`);
     app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
     app.use(
-      bodyParser.urlencoded({
-        extended: true,
-        limit: process.env.REQUEST_LIMIT || '100kb',
-      }),
+      bodyParser.urlencoded(
+        {
+          extended: true,
+          limit: process.env.REQUEST_LIMIT || '100kb',
+        },
+      ),
     );
     app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || '100kb' }));
     app.use(cookieParser(process.env.SESSION_SECRET));
     app.use(express.static(`${root}/public`));
+    app.use(passport.initialize());
+    app.use(passport.session());
   }
   
   router(routes: (app: Application) => void): ExpressServer {
@@ -39,7 +44,7 @@ export default class ExpressServer {
     const welcome = (p: number) => () =>
       l.info(
         `up and running in ${process.env.NODE_ENV ||
-          'development'} @: ${os.hostname()} on port: ${p}}`
+        'development'} @: ${os.hostname()} on port: ${p}}`,
       );
     
     installValidator(app, this.routes)
