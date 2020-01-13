@@ -3,6 +3,10 @@ import { Application } from 'express';
 import userRouter from './api/controllers/users/router';
 import examplesRouter from './api/controllers/examples/router';
 
+import "./api/data/models/device"
+import "./api/data/models/book"
+import "./api/data/models/book.device"
+
 import passport from 'passport';
 import './api/auth/local';
 

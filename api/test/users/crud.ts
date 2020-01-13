@@ -3,15 +3,19 @@ import { expect } from 'chai';
 import request from 'supertest';
 import Server from '../../server';
 
-import * as HTTPStatus from 'http-status';
-
 let user;
 
 describe('User CRUD', () => {
   before(async () => {
     const response = await request(Server)
       .post('/api/v1/users')
-      .send({ name: 'John Doe', email: 'john@doe.com', password: 'john@doe' });
+      .send(
+        {
+          name: 'John Doe',
+          email: 'john@doe.com',
+          password: 'john@doe',
+        },
+      );
     
     user = response.body;
   });
