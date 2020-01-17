@@ -14,6 +14,11 @@ describe('User CRUD', () => {
           name: 'John Doe',
           email: 'john@doe.com',
           password: 'john@doe',
+          books: [
+            {
+              name: 'My Book 1',
+            },
+          ],
         },
       );
     

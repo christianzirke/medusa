@@ -1,5 +1,7 @@
 import { Response, Request } from 'express';
+
 import usersService from '../../services/users.service';
+
 import * as HTTPStatus from 'http-status';
 
 export class Controller {
