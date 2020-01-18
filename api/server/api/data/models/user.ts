@@ -1,4 +1,4 @@
-import { Model, DataTypes } from 'sequelize';
+import Sequelize, { Model, DataTypes } from 'sequelize';
 import book from './book';
 
 export default class user extends Model<user> {
@@ -9,7 +9,27 @@ export default class user extends Model<user> {
   readonly createdAt: Date;
   readonly updatedAt: Date;
   
-  createBook: (book: book) => Promise<book>
+  getBooks: Sequelize.HasManyGetAssociationsMixin<book>;
+  setBooks: Sequelize.HasManySetAssociationsMixin<book, book['id']>;
+  addBooks: Sequelize.HasManyAddAssociationsMixin<book, book['id']>;
+  addBook: Sequelize.HasManyAddAssociationMixin<book, book['id']>;
+  createBook: Sequelize.HasManyCreateAssociationMixin<book>;
+  removeBook: Sequelize.HasManyRemoveAssociationsMixin<book, book['id']>;
+  removeBooks: Sequelize.HasManyRemoveAssociationsMixin<book, book['id']>;
+  haBooks: Sequelize.HasManyHasAssociationMixin<book, book['id']>;
+  hasBooks: Sequelize.HasManyHasAssociationsMixin<book, book['id']>;
+  countBooks: Sequelize.HasManyCountAssociationsMixin;
+  
+  getDevices: Sequelize.HasManyGetAssociationsMixin<book>;
+  setDevices: Sequelize.HasManySetAssociationsMixin<book, book['id']>;
+  addDevices: Sequelize.HasManyAddAssociationsMixin<book, book['id']>;
+  addDevice: Sequelize.HasManyAddAssociationMixin<book, book['id']>;
+  createDevice: Sequelize.HasManyCreateAssociationMixin<book>;
+  removeDevice: Sequelize.HasManyRemoveAssociationsMixin<book, book['id']>;
+  removeDevices: Sequelize.HasManyRemoveAssociationsMixin<book, book['id']>;
+  hasDevice: Sequelize.HasManyHasAssociationMixin<book, book['id']>;
+  hasDevices: Sequelize.HasManyHasAssociationsMixin<book, book['id']>;
+  countDevices: Sequelize.HasManyCountAssociationsMixin;
 }
 
 const userInit = (sequelize) => {

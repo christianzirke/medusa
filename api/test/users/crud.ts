@@ -82,7 +82,7 @@ describe('User CRUD', () => {
     agent
       .post('/api/v1/books')
       .send({ name: 'Sequelize 101' })
-      // .expect('Content-Type', /json/)
+      .expect('Content-Type', /json/)
       .then(
         (r) => {
           expect(r.status).to.be.eq(201);

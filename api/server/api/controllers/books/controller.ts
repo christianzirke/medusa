@@ -24,10 +24,7 @@ export class Controller {
     
     const { user, body } = request;
     
-    const book = await user.createBook({
-      ...body,
-      // userId, //
-    });
+    const book = await user.createBook(body);
     
     response.status(HTTPStatus.CREATED).json(book);
   }
