@@ -1,16 +1,23 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-      "experimentalDecorators": true,
+    "experimentalDecorators": true,
     "target": "es6",
     "module": "commonjs",
     "esModuleInterop": true,
     "sourceMap": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "resolveJsonModule": true
   },
-  "include": ["typings.d.ts", "server/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "typings.d.ts",
+    "server/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

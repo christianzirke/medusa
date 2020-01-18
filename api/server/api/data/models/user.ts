@@ -1,4 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
+import Book from './book';
 
 export default class User extends Model<User> {
   id: number;
@@ -7,6 +8,8 @@ export default class User extends Model<User> {
   password: string;
   readonly createdAt: Date;
   readonly updatedAt: Date;
+  
+  createBook: (book: Book) => Promise<Book>
 }
 
 const init = (sequelize) => {
@@ -46,16 +49,22 @@ const init = (sequelize) => {
 
 const associate = ({ Book, Device }) => {
   User.hasMany(Book, {
-    foreignKey: 'userId',
     as: 'books',
+    foreignKey: {
+      field: 'userId',
+      allowNull: false,
+    },
+    onDelete: 'CASCADE',
   });
   
   User.hasMany(Device, {
-    foreignKey: 'userId',
+    foreignKey: {
+      field: 'userId',
+      allowNull: false,
+    },
+    onDelete: 'CASCADE',
     as: 'devices',
   });
-  
-  User.sync();
 };
 
 export { associate, init };

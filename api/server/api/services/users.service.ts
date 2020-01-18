@@ -26,7 +26,7 @@ export class ExamplesService {
         
         data.password = hash;
         
-        return User.create(data, {include: ["books"]}).then(resolve).catch(reject);
+        return User.create(data).then(resolve).catch(reject);
       });
     });
   }

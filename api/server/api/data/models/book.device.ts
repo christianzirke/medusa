@@ -1,5 +1,4 @@
 import { Model, DataTypes } from 'sequelize';
-import sequelize from '../database';
 
 export default class BookDevice extends Model<BookDevice> {
   id: number;
@@ -29,8 +28,6 @@ const init = (sequelize) => {
     tableName: 'booksdevices',
     paranoid: true,
   });
-  
-  BookDevice.sync();
 };
 
 export { init };

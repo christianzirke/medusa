@@ -28,12 +28,13 @@ const sequelize = new Sequelize('medusa', process.env.MYSQL_USER || 'root', proc
 userInit(sequelize);
 deviceInit(sequelize);
 bookInit(sequelize);
+bookDeviceInit(sequelize);
 
 const models = { User, Device, Book, BookDevice };
 userAssociate(models);
 deviceAssociate(models);
 bookAssociate(models);
 
-bookDeviceInit(sequelize);
+sequelize.sync() ;
 
 export default sequelize;

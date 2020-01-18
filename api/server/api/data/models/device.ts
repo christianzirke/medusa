@@ -1,5 +1,4 @@
 import { Model, DataTypes } from 'sequelize';
-import sequelize from '../database';
 
 export default class Device extends Model<Device> {
   id: number;
@@ -29,16 +28,20 @@ const init = (sequelize) => {
 const associate = ({ Book, User }) => {
   Device.belongsTo(User, {
     as: 'user',
-    foreignKey: 'userId'
+    foreignKey: {
+      field: 'userId',
+      allowNull: false
+    }
   });
   
   Device.belongsToMany(Book, {
     as: 'books',
-    foreignKey: 'deviceId',
+    foreignKey: {
+      allowNull: false,
+      field: 'deviceId'
+    },
     through: 'BookDevice',
   });
-  
-  Device.sync();
 };
 
 export { associate, init };

@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import path from 'path';
@@ -31,6 +32,7 @@ export default class ExpressServer {
     app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || '100kb' }));
     app.use(cookieParser(process.env.SESSION_SECRET));
     app.use(express.static(`${root}/public`));
+    app.use(session({ secret: 'keyboard cat' }));
     app.use(passport.initialize());
     app.use(passport.session());
   }
