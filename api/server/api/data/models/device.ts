@@ -1,14 +1,14 @@
 import { Model, DataTypes } from 'sequelize';
 
-export default class Device extends Model<Device> {
+export default class device extends Model<device> {
   id: number;
   name: string;
   readonly createdAt: Date;
   readonly updatedAt: Date;
 }
 
-const init = (sequelize) => {
-  Device.init({
+const deviceInit = (sequelize) => {
+  device.init({
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
@@ -21,27 +21,28 @@ const init = (sequelize) => {
   }, {
     sequelize,
     tableName: 'devices',
-    paranoid: true,
   });
 };
 
-const associate = ({ Book, User }) => {
-  Device.belongsTo(User, {
+const deviceAssociate = ({ book, user }) => {
+  device.belongsTo(user, {
     as: 'user',
+    onDelete: 'CASCADE',
     foreignKey: {
       field: 'userId',
       allowNull: false
     }
   });
   
-  Device.belongsToMany(Book, {
+  device.belongsToMany(book, {
     as: 'books',
     foreignKey: {
       allowNull: false,
       field: 'deviceId'
     },
-    through: 'BookDevice',
+    onDelete: 'CASCADE',
+    through: 'bookDevice',
   });
 };
 
-export { associate, init };
+export { deviceAssociate, deviceInit };

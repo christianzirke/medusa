@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 
-export default class BookDevice extends Model<BookDevice> {
+export default class bookDevice extends Model<bookDevice> {
   id: number;
   bookId: number;
   deviceId: number;
@@ -8,8 +8,8 @@ export default class BookDevice extends Model<BookDevice> {
   readonly updatedAt: Date;
 }
 
-const init = (sequelize) => {
-  BookDevice.init({
+const bookDeviceInit = (sequelize) => {
+  bookDevice.init({
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
@@ -26,8 +26,7 @@ const init = (sequelize) => {
   }, {
     sequelize,
     tableName: 'booksdevices',
-    paranoid: true,
   });
 };
 
-export { init };
+export { bookDeviceInit };

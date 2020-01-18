@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
-import Book from './book';
+import book from './book';
 
-export default class User extends Model<User> {
+export default class user extends Model<user> {
   id: number;
   name: string;
   email: string;
@@ -9,11 +9,11 @@ export default class User extends Model<User> {
   readonly createdAt: Date;
   readonly updatedAt: Date;
   
-  createBook: (book: Book) => Promise<Book>
+  createBook: (book: book) => Promise<book>
 }
 
-const init = (sequelize) => {
-  User.init({
+const userInit = (sequelize) => {
+  user.init({
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
@@ -35,7 +35,6 @@ const init = (sequelize) => {
   }, {
     sequelize,
     tableName: 'users',
-    paranoid: true,
     defaultScope: {
       attributes: { exclude: ['password'] },
     },
@@ -47,17 +46,13 @@ const init = (sequelize) => {
   });
 };
 
-const associate = ({ Book, Device }) => {
-  User.hasMany(Book, {
+const userAssociate = ({ book, device }) => {
+  user.hasMany(book, {
     as: 'books',
-    foreignKey: {
-      field: 'userId',
-      allowNull: false,
-    },
     onDelete: 'CASCADE',
   });
   
-  User.hasMany(Device, {
+  user.hasMany(device, {
     foreignKey: {
       field: 'userId',
       allowNull: false,
@@ -67,4 +62,4 @@ const associate = ({ Book, Device }) => {
   });
 };
 
-export { associate, init };
+export { userAssociate, userInit };
